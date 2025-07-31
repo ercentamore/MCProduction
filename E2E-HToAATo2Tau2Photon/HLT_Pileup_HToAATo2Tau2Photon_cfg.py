@@ -2,11 +2,13 @@
 # using:
 # Revision: 1.19
 # Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v
-# with command line options: --python_filename AOD_HToAATo2Tau2Photon_cfg.py --eventcontent AODSIM --customise Configuration/DataProcessing/Utils.addMonitoring --datatier AODSIM --fileout file:AOD_HToAATo2Tau2Photon.root --conditions 130X_mcRun3_2023_realistic_postBPix_v6 --step RAW2DIGI,L1Reco,RECO,RECOSIM --geometry DB:Extended --filein file:HLT_Pielup_HToAATo2Tau2Photon.root --era Run3_2023 --no_exec --mc -n -1
+# with command line options: --python_filename HLT_Pielup_QCD_pt15to7000_Run3Summer23GS_00004_1_cfg.py --eventcontent PREMIXRAW --customise Configuration/DataProcessing/Utils.addMonitoring --datatier GEN-SIM-RAW --fileout file:HLT_Pielup_QCD_pt15to7000_Run3Summer23GS.root --pileup_input dbs:/Neutrino_E-10_gun/Run3Summer21PrePremix-Summer23_130X_mcRun3_2023_realistic_v13-v1/PREMIX --conditions 130X_mcRun3_2023_realistic_v14 --step DIGI,DATAMIX,L1,DIGI2RAW,HLT:2023v12 --procModifiers premix_stage2 --geometry DB:Extended --filein file:GEN_SIM_QCD_pt15to7000_Run3Summer23GS.root --datamix PreMix --era Run3_2023 --no_exec --mc -n -1
 import FWCore.ParameterSet.Config as cms
-from Configuration.Eras.Era_Run3_2023_cff import Run3_2023
 
-process = cms.Process('RECO',Run3_2023)
+from Configuration.Eras.Era_Run3_2023_cff import Run3_2023
+from Configuration.ProcessModifiers.premix_stage2_cff import premix_stage2
+
+process = cms.Process('HLT',Run3_2023,premix_stage2)
 
 # import of standard configurations
 process.load('Configuration.StandardSequences.Services_cff')
@@ -16,10 +18,11 @@ process.load('Configuration.EventContent.EventContent_cff')
 process.load('SimGeneral.MixingModule.mixNoPU_cfi')
 process.load('Configuration.StandardSequences.GeometryRecoDB_cff')
 process.load('Configuration.StandardSequences.MagneticField_cff')
-process.load('Configuration.StandardSequences.RawToDigi_cff')
-process.load('Configuration.StandardSequences.L1Reco_cff')
-process.load('Configuration.StandardSequences.Reconstruction_cff')
-process.load('Configuration.StandardSequences.RecoSim_cff')
+process.load('Configuration.StandardSequences.DigiDM_cff')
+process.load('Configuration.StandardSequences.DataMixerPreMix_cff')
+process.load('Configuration.StandardSequences.SimL1EmulatorDM_cff')
+process.load('Configuration.StandardSequences.DigiToRawDM_cff')
+process.load('HLTrigger.Configuration.HLT_2023v12_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
@@ -30,7 +33,28 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('file:HLT_Pileup_HToAATo2Tau2Photon.root'),
+    dropDescendantsOfDroppedBranches = cms.untracked.bool(False),
+    fileNames = cms.untracked.vstring('file:GEN_SIM_HToAATo2Tau2Photon.root'),
+    #fileNames = cms.untracked.vstring('file:GEN_SIM_QCD_pt15to7000_Run3Summer23GS.root'),
+    inputCommands = cms.untracked.vstring(
+        'keep *',
+        'drop *_genParticles_*_*',
+        'drop *_genParticlesForJets_*_*',
+        'drop *_kt4GenJets_*_*',
+        'drop *_kt6GenJets_*_*',
+        'drop *_iterativeCone5GenJets_*_*',
+        'drop *_ak4GenJets_*_*',
+        'drop *_ak7GenJets_*_*',
+        'drop *_ak8GenJets_*_*',
+        'drop *_ak4GenJetsNoNu_*_*',
+        'drop *_ak8GenJetsNoNu_*_*',
+        'drop *_genCandidatesForMET_*_*',
+        'drop *_genParticlesForMETAllVisible_*_*',
+        'drop *_genMetCalo_*_*',
+        'drop *_genMetCaloAndNonPrompt_*_*',
+        'drop *_genMetTrue_*_*',
+        'drop *_genMetIC5GenJs_*_*'
+    ),
     secondaryFileNames = cms.untracked.vstring()
 )
 
@@ -75,35 +99,40 @@ process.configurationMetadata = cms.untracked.PSet(
 
 # Output definition
 
-process.AODSIMoutput = cms.OutputModule("PoolOutputModule",
-    compressionAlgorithm = cms.untracked.string('LZMA'),
-    compressionLevel = cms.untracked.int32(4),
+process.PREMIXRAWoutput = cms.OutputModule("PoolOutputModule",
     dataset = cms.untracked.PSet(
-        dataTier = cms.untracked.string('AODSIM'),
+        dataTier = cms.untracked.string('GEN-SIM-RAW'),
         filterName = cms.untracked.string('')
     ),
-    eventAutoFlushCompressedSize = cms.untracked.int32(31457280),
-    fileName = cms.untracked.string('file:AOD_HToAATo2Tau2Photon.root'),
-    outputCommands = process.AODSIMEventContent.outputCommands,
-    overrideInputFileSplitLevels = cms.untracked.bool(True)
+    fileName = cms.untracked.string('file:HLT_Pileup_HToAATo2Tau2Photon.root'),
+    outputCommands = process.PREMIXRAWEventContent.outputCommands,
+    splitLevel = cms.untracked.int32(0)
 )
 
 # Additional output definition
 
 # Other statements
+process.mixData.input.fileNames = cms.untracked.vstring(open('./neutrino_pileup_Bpix.txt').readlines())
+process.mixData.input.skipBadFiles = cms.untracked.bool(True)
+#process.mixData.input.fileNames = cms.untracked.vstring(open('./neutrino_gun_pileup_files.txt').readlines())
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, '130X_mcRun3_2023_realistic_postBPix_v6', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, '130X_mcRun3_2023_realistic_postBPix_v5', '')
 
 # Path and EndPath definitions
-process.raw2digi_step = cms.Path(process.RawToDigi)
-process.L1Reco_step = cms.Path(process.L1Reco)
-process.reconstruction_step = cms.Path(process.reconstruction)
-process.recosim_step = cms.Path(process.recosim)
+process.digitisation_step = cms.Path(process.pdigi)
+process.datamixing_step = cms.Path(process.pdatamix)
+process.L1simulation_step = cms.Path(process.SimL1Emulator)
+process.digi2raw_step = cms.Path(process.DigiToRaw)
 process.endjob_step = cms.EndPath(process.endOfProcess)
-process.AODSIMoutput_step = cms.EndPath(process.AODSIMoutput)
+process.PREMIXRAWoutput_step = cms.EndPath(process.PREMIXRAWoutput)
 
 # Schedule definition
-process.schedule = cms.Schedule(process.raw2digi_step,process.L1Reco_step,process.reconstruction_step,process.recosim_step,process.endjob_step,process.AODSIMoutput_step)
+# process.schedule imported from cff in HLTrigger.Configuration
+process.schedule.insert(0, process.digitisation_step)
+process.schedule.insert(1, process.datamixing_step)
+process.schedule.insert(2, process.L1simulation_step)
+process.schedule.insert(3, process.digi2raw_step)
+process.schedule.extend([process.endjob_step,process.PREMIXRAWoutput_step])
 from PhysicsTools.PatAlgos.tools.helpers import associatePatAlgosToolsTask
 associatePatAlgosToolsTask(process)
 
@@ -115,14 +144,16 @@ from Configuration.DataProcessing.Utils import addMonitoring
 #call to customisation function addMonitoring imported from Configuration.DataProcessing.Utils
 process = addMonitoring(process)
 
+# Automatic addition of the customisation function from HLTrigger.Configuration.customizeHLTforMC
+from HLTrigger.Configuration.customizeHLTforMC import customizeHLTforMC
+
+#call to customisation function customizeHLTforMC imported from HLTrigger.Configuration.customizeHLTforMC
+process = customizeHLTforMC(process)
+
 # End of customisation functions
 
 
 # Customisation from command line
-
-#Have logErrorHarvester wait for the same EDProducers to finish as those providing data for the OutputModule
-from FWCore.Modules.logErrorHarvester_cff import customiseLogErrorHarvesterUsingOutputCommands
-process = customiseLogErrorHarvesterUsingOutputCommands(process)
 
 # Add early deletion of temporary data products to reduce peak memory need
 from Configuration.StandardSequences.earlyDeleteSettings_cff import customiseEarlyDelete
