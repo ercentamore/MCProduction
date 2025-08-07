@@ -21,7 +21,7 @@ process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(100000),
+    input = cms.untracked.int32(1),
     output = cms.optional.untracked.allowed(cms.int32,cms.PSet)
 )
 
@@ -52,7 +52,7 @@ process.options = cms.untracked.PSet(
     modulesToIgnoreForDeleteEarly = cms.untracked.vstring(),
     numberOfConcurrentLuminosityBlocks = cms.untracked.uint32(1),
     numberOfConcurrentRuns = cms.untracked.uint32(1),
-    numberOfStreams = cms.untracked.uint32(8),
+    numberOfStreams = cms.untracked.uint32(0),
     numberOfThreads = cms.untracked.uint32(8),
     printDependencies = cms.untracked.bool(False),
     sizeOfStackForThreadsInKB = cms.optional.untracked.uint32,
@@ -99,10 +99,12 @@ process.genHToAATo2Tau2PhotonFilter = cms.EDFilter("GenHToAATo2Tau2PhotonFilter"
    src        = cms.InputTag("genParticles"), #GenParticles collection as input
    tauPtCut   = cms.double(5.0),     # GenTau minimum pT
    tauEtaCut  = cms.double(2.4),     # GenTau eta max value
-   phoPtCut   = cms.double(15.0),     # GenPho minimum pT
+   phoPtCut   = cms.double(13.0),    # GenPho minimum pT
    phoEtaCut  = cms.double(2.4),     # GenPho eta max value
    phoDrCut   = cms.double(0.1),     # min dR between the photons
-   nHiggs     = cms.int32(1),          # number of Higgs in the event
+   diPhoPtCut = cms.double(26),      # diPhoton pseudoscalar pT
+   diTauPtCut = cms.double(8),       # diTau pseudoscalar pT
+   nHiggs     = cms.int32(1),        # number of Higgs in the event
 )
 
 process.generator = cms.EDFilter("Pythia8GeneratorFilter",
