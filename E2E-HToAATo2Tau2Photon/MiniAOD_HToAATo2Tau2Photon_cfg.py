@@ -1,12 +1,3 @@
-# Auto generated configuration file
-# using: 
-# Revision: 1.19 
-# Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v 
-# with command line options: --python_filename MiniAOD_HToAATo2Tau2Photon_cfg.py \
-# --eventcontent MINIAODSIM --customise Configuration/DataProcessing/Utils.addMonitoring \
-# --datatier MINIAODSIM --fileout file:MiniAOD_HToAATo2Tau2Photon.root \
-# --conditions 130X_mcRun3_2023_realistic_postBPix_v6 --step PAT --geometry DB:Extended \
-# --filein file:AOD_HToAATo2Tau2Photon.root --era Run3_2023 --no_exec --mc -n -1
 import FWCore.ParameterSet.Config as cms
 
 from Configuration.Eras.Era_Run3_2023_cff import Run3_2023
@@ -62,7 +53,7 @@ process.options = cms.untracked.PSet(
     numberOfConcurrentLuminosityBlocks = cms.untracked.uint32(0),
     numberOfConcurrentRuns = cms.untracked.uint32(1),
     numberOfStreams = cms.untracked.uint32(0),
-    numberOfThreads = cms.untracked.uint32(8),
+    numberOfThreads = cms.untracked.uint32(4),
     printDependencies = cms.untracked.bool(False),
     sizeOfStackForThreadsInKB = cms.optional.untracked.uint32,
     throwIfIllegalParameter = cms.untracked.bool(True),

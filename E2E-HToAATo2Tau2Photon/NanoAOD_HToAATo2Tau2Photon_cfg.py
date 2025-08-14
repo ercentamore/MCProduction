@@ -1,8 +1,3 @@
-# Auto generated configuration file
-# using:
-# Revision: 1.19
-# Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v
-# with command line options: --python_filename NanoAOD_HToAATo2Tau2Photon_cfg.py --eventcontent NANOEDMAODSIM --customise Configuration/DataProcessing/Utils.addMonitoring --datatier NANOAODSIM --fileout file:NanoAOD_HToAATo2Tau2Photon_M3p7.root --conditions 133X_mcRun3_2023_realistic_postBPix_ForNanov13_v2 --step NANO --scenario pp --filein file:MiniAOD_HToAATo2Tau2Photon_M3p7.root --era Run3_2023 --no_exec --mc -n -1
 import FWCore.ParameterSet.Config as cms
 
 from Configuration.Eras.Era_Run3_2023_cff import Run3_2023
@@ -57,7 +52,7 @@ process.options = cms.untracked.PSet(
     numberOfConcurrentLuminosityBlocks = cms.untracked.uint32(0),
     numberOfConcurrentRuns = cms.untracked.uint32(1),
     numberOfStreams = cms.untracked.uint32(0),
-    numberOfThreads = cms.untracked.uint32(8),
+    numberOfThreads = cms.untracked.uint32(4),
     printDependencies = cms.untracked.bool(False),
     sizeOfStackForThreadsInKB = cms.optional.untracked.uint32,
     throwIfIllegalParameter = cms.untracked.bool(True),
