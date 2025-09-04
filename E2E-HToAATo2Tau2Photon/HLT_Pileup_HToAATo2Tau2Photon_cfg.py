@@ -1,8 +1,3 @@
-# Auto generated configuration file
-# using:
-# Revision: 1.19
-# Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v
-# with command line options: --python_filename HLT_Pielup_QCD_pt15to7000_Run3Summer23GS_00004_1_cfg.py --eventcontent PREMIXRAW --customise Configuration/DataProcessing/Utils.addMonitoring --datatier GEN-SIM-RAW --fileout file:HLT_Pielup_QCD_pt15to7000_Run3Summer23GS.root --pileup_input dbs:/Neutrino_E-10_gun/Run3Summer21PrePremix-Summer23_130X_mcRun3_2023_realistic_v13-v1/PREMIX --conditions 130X_mcRun3_2023_realistic_v14 --step DIGI,DATAMIX,L1,DIGI2RAW,HLT:2023v12 --procModifiers premix_stage2 --geometry DB:Extended --filein file:GEN_SIM_QCD_pt15to7000_Run3Summer23GS.root --datamix PreMix --era Run3_2023 --no_exec --mc -n -1
 import FWCore.ParameterSet.Config as cms
 
 from Configuration.Eras.Era_Run3_2023_cff import Run3_2023
@@ -35,7 +30,6 @@ process.maxEvents = cms.untracked.PSet(
 process.source = cms.Source("PoolSource",
     dropDescendantsOfDroppedBranches = cms.untracked.bool(False),
     fileNames = cms.untracked.vstring('file:GEN_SIM_HToAATo2Tau2Photon.root'),
-    #fileNames = cms.untracked.vstring('file:GEN_SIM_QCD_pt15to7000_Run3Summer23GS.root'),
     inputCommands = cms.untracked.vstring(
         'keep *',
         'drop *_genParticles_*_*',
@@ -83,7 +77,7 @@ process.options = cms.untracked.PSet(
     numberOfConcurrentLuminosityBlocks = cms.untracked.uint32(0),
     numberOfConcurrentRuns = cms.untracked.uint32(1),
     numberOfStreams = cms.untracked.uint32(0),
-    numberOfThreads = cms.untracked.uint32(8),
+    numberOfThreads = cms.untracked.uint32(4),
     printDependencies = cms.untracked.bool(False),
     sizeOfStackForThreadsInKB = cms.optional.untracked.uint32,
     throwIfIllegalParameter = cms.untracked.bool(True),
@@ -114,7 +108,6 @@ process.PREMIXRAWoutput = cms.OutputModule("PoolOutputModule",
 # Other statements
 process.mixData.input.fileNames = cms.untracked.vstring(open('./neutrino_pileup_Bpix.txt').readlines())
 process.mixData.input.skipBadFiles = cms.untracked.bool(True)
-#process.mixData.input.fileNames = cms.untracked.vstring(open('./neutrino_gun_pileup_files.txt').readlines())
 from Configuration.AlCa.GlobalTag import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, '130X_mcRun3_2023_realistic_postBPix_v5', '')
 
