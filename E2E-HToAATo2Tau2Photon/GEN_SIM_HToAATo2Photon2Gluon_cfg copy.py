@@ -89,7 +89,7 @@ process.RAWSIMoutput = cms.OutputModule("PoolOutputModule",
         filterName = cms.untracked.string('')
     ),
     eventAutoFlushCompressedSize = cms.untracked.int32(20971520),
-    fileName = cms.untracked.string('file:GEN_SIM_HToAATo2Tau2Photon.root'),
+    fileName = cms.untracked.string('file:GEN_SIM_HToAATo2Gluon2Photon.root'),
     outputCommands = process.RAWSIMEventContent.outputCommands,
     splitLevel = cms.untracked.int32(0)
 )
@@ -103,13 +103,13 @@ process.genstepfilter.triggerConditions=cms.vstring("generation_step")
 from Configuration.AlCa.GlobalTag import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, '130X_mcRun3_2023_realistic_postBPix_v5', '')
 
-process.genHToAATo2Tau2PhotonFilter = cms.EDFilter("GenHToAATo2Tau2PhotonFilter",
-   src        = cms.InputTag("genParticles"), #GenParticles collection as input
-   tauPtCut   = cms.double(5.0),     # GenTau minimum pT
-   tauEtaCut  = cms.double(2.4),     # GenTau eta max value
-   phoPtCut_  = cms.double(5.0),     # GenPho minimum pT
+process.GenHToAATo2Gluon2PhotonFilter = cms.EDFilter("GenHToAATo2Gluon2PhotonFilter",
+   #src        = cms.InputTag("genParticles"), #GenParticles collection as input
+   #tauPtCut_  = cms.double(5.0),     # GenTau minimum pT
+   gluEtaCut_ = cms.double(2.4),     # GenTau eta max value
+   #phoPtCut_  = cms.double(5.0),     # GenPho minimum pT
    phoEtaCut_ = cms.double(2.4),     # GenPho eta max value
-   phoDrCut_  = cms.double(0.2),     # min dR between the photons
+   #phoDrCut_  = cms.double(0.2),     # min dR between the photons
    nHiggs_    = cms.int32(1),          # number of Higgs in the event
 )
 
@@ -198,7 +198,7 @@ process.generator = cms.EDFilter("Pythia8PtGunV4",
 process.ProductionFilterSequence = cms.Sequence(process.generator)
 
 # Path and EndPath definitions
-process.generation_step = cms.Path(process.pgen + process.genHToAATo2Tau2PhotonFilter)
+process.generation_step = cms.Path(process.pgen + process.GenHToAATo2Gluon2PhotonFilter)
 process.simulation_step = cms.Path(process.psim)
 process.genfiltersummary_step = cms.EndPath(process.genFilterSummary)
 process.endjob_step = cms.EndPath(process.endOfProcess)
