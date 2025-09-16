@@ -113,7 +113,7 @@ process.GenHToAATo2Gluon2PhotonFilter = cms.EDFilter("GenHToAATo2Gluon2PhotonFil
    nHiggs_    = cms.int32(1),          # number of Higgs in the event
 )
 
-process.generator = cms.EDFilter("Pythia8PtGunV4",
+process.generator = cms.EDFilter("Pythia8PtGun",
     PGunParameters = cms.PSet(
         MinEta = cms.double(-2.4),
         MaxEta = cms.double(2.4),
@@ -121,10 +121,8 @@ process.generator = cms.EDFilter("Pythia8PtGunV4",
 		MaxPhi = cms.double(3.14159),
         MinPt = cms.double(5.0),
         MaxPt = cms.double(150.0),
-        PtRes = cms.double(5.0),
 		MinMass = cms.double(3.6),
         MaxMass = cms.double(8.0),
-        MassRes = cms.double(0.2),
         AddAntiParticle = cms.bool(False),
         ParticleID = cms.vint32(35)
     ),
