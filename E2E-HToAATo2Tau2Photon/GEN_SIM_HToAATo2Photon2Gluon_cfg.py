@@ -104,7 +104,7 @@ from Configuration.AlCa.GlobalTag import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, '130X_mcRun3_2023_realistic_postBPix_v5', '')
 
 process.GenHToAATo2Gluon2PhotonFilter = cms.EDFilter("GenHToAATo2Gluon2PhotonFilter",
-   #src        = cms.InputTag("genParticles"), #GenParticles collection as input
+   src        = cms.InputTag("genParticles"), #GenParticles collection as input
    #tauPtCut_  = cms.double(5.0),     # GenTau minimum pT
    gluEtaCut_ = cms.double(2.4),     # GenTau eta max value
    #phoPtCut_  = cms.double(5.0),     # GenPho minimum pT
