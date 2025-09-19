@@ -1,5 +1,12 @@
-import FWCore.ParameterSet.Config as cms
-
+# Auto generated configuration file
+# using:
+# Revision: 1.19
+# Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v
+# with command line options: 
+# Configuration/GenProduction/python/HIG-Run3Summer23BPixGS-00006-fragment_modified_To_H_AA_2Photon2Tau_leptonic.py \
+# --python_filename HToAA2Tau2Photon_GEN_SIM_cfg.py --eventcontent RAWSIM --customise Configuration/DataProcessing/Utils.addMonitoring \
+# --datatier GEN-SIM --fileout file:GEN_SIM_HToAATo2Tau2Photon.root --conditions 130X_mcRun3_2023_realistic_postBPix_v5 \
+# --beamspot Realistic25ns13p6TeVEarly2023Collision --step GEN,SIM --geometry DB:Extended --era Run3_2023 --no_exec --mc -n 10import FWCore.ParameterSet.Config as cms
 from Configuration.Eras.Era_Run3_2023_cff import Run3_2023
 
 process = cms.Process('SIM',Run3_2023)
