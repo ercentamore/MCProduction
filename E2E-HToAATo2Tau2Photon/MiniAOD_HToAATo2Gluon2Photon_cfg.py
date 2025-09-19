@@ -77,7 +77,7 @@ process.MINIAODSIMoutput = cms.OutputModule("PoolOutputModule",
         filterName = cms.untracked.string('')
     ),
     dropMetaData = cms.untracked.string('ALL'),
-    evenGluontoFlushCompressedSize = cms.untracked.int32(-900),
+    eventAutoFlushCompressedSize = cms.untracked.int32(-900),
     fastCloning = cms.untracked.bool(False),
     fileName = cms.untracked.string('file:MiniAOD_HToAATo2Gluon2Photon.root'),
     #outputCommands = process.MINIAODSIMEventContent.outputCommands,
