@@ -24,7 +24,7 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('file:AOD_HToAATo2Tau2Photon.root'),
+    fileNames = cms.untracked.vstring('file:AOD_HToAATo2Gluon2Photon.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 
@@ -77,9 +77,9 @@ process.MINIAODSIMoutput = cms.OutputModule("PoolOutputModule",
         filterName = cms.untracked.string('')
     ),
     dropMetaData = cms.untracked.string('ALL'),
-    eventAutoFlushCompressedSize = cms.untracked.int32(-900),
+    evenGluontoFlushCompressedSize = cms.untracked.int32(-900),
     fastCloning = cms.untracked.bool(False),
-    fileName = cms.untracked.string('file:MiniAOD_HToAATo2Tau2Photon.root'),
+    fileName = cms.untracked.string('file:MiniAOD_HToAATo2Gluon2Photon.root'),
     #outputCommands = process.MINIAODSIMEventContent.outputCommands,
     outputCommands = process.MINIAODSIMEventContent.outputCommands+cms.untracked.vstring(
 	'keep *_generalTracks_*_*',

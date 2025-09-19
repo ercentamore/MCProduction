@@ -29,7 +29,7 @@ process.maxEvents = cms.untracked.PSet(
 # Input source
 process.source = cms.Source("PoolSource",
     dropDescendantsOfDroppedBranches = cms.untracked.bool(False),
-    fileNames = cms.untracked.vstring('file:GEN_SIM_HToAATo2Tau2Photon.root'),
+    fileNames = cms.untracked.vstring('file:GEN_SIM_HToAATo2Gluon2Photon.root'),
     inputCommands = cms.untracked.vstring(
         'keep *',
         'drop *_genParticles_*_*',
@@ -98,7 +98,7 @@ process.PREMIXRAWoutput = cms.OutputModule("PoolOutputModule",
         dataTier = cms.untracked.string('GEN-SIM-RAW'),
         filterName = cms.untracked.string('')
     ),
-    fileName = cms.untracked.string('file:HLT_Pileup_HToAATo2Tau2Photon.root'),
+    fileName = cms.untracked.string('file:HLT_Pileup_HToAATo2Gluon2Photon.root'),
     outputCommands = process.PREMIXRAWEventContent.outputCommands,
     splitLevel = cms.untracked.int32(0)
 )
