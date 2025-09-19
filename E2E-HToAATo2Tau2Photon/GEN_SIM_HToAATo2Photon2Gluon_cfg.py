@@ -186,6 +186,17 @@ process.generator = cms.EDFilter("Pythia8PtGun",
             'ParticleDecays:allowPhotonRadiation = on'
         )
     ),
+	UserCustomization = cms.VPSet(
+        cms.PSet(
+            pluginName  = cms.string('HToAAHook'),
+            minMass     = cms.double(3.6),
+            maxMass     = cms.double(8.0),
+            massRes     = cms.double(0.2),
+            motherID    = cms.uint32(25),
+            daughter1ID = cms.uint32(36),
+            daughter2ID = cms.uint32(35)
+        )
+    ),
     comEnergy = cms.double(13600.0),
     crossSection = cms.untracked.double(1.0),
     filterEfficiency = cms.untracked.double(1),
