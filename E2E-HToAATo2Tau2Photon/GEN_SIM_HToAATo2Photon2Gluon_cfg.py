@@ -167,7 +167,7 @@ process.generator = cms.EDFilter("Pythia8GeneratorFilter",
     ),
 	UserCustomization = cms.VPSet(
         cms.PSet(
-            pluginName  = cms.string('HToAAHook'),
+            pluginName  = cms.string('HtoAAhook'),
             minMass     = cms.double(3.6),
             maxMass     = cms.double(8.0),
             massRes     = cms.double(0.2),
