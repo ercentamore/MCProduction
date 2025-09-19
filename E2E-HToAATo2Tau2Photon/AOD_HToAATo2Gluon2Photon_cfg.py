@@ -82,7 +82,7 @@ process.AODSIMoutput = cms.OutputModule("PoolOutputModule",
         dataTier = cms.untracked.string('AODSIM'),
         filterName = cms.untracked.string('')
     ),
-    evenGluontoFlushCompressedSize = cms.untracked.int32(31457280),
+    eventAutoFlushCompressedSize = cms.untracked.int32(31457280),
     fileName = cms.untracked.string('file:AOD_HToAATo2Gluon2Photon.root'),
     outputCommands = process.AODSIMEventContent.outputCommands,
     overrideInputFileSplitLevels = cms.untracked.bool(True)
