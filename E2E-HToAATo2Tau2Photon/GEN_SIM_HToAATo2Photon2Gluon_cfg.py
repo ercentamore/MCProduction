@@ -171,9 +171,9 @@ process.generator = cms.EDFilter("Pythia8GeneratorFilter",
             minMass     = cms.double(3.6),
             maxMass     = cms.double(8.0),
             massRes     = cms.double(0.2),
-            motherID    = cms.uint32(25),
-            daughter1ID = cms.uint32(36),
-            daughter2ID = cms.uint32(35)
+            motherID    = cms.int(25),
+            daughter1ID = cms.int(36),
+            daughter2ID = cms.int(35)
         )
     ),
     comEnergy = cms.double(13600.0),
