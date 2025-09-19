@@ -1,12 +1,3 @@
-# Auto generated configuration file
-# using:
-# Revision: 1.19
-# Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v
-# with command line options: 
-# Configuration/GenProduction/python/HIG-Run3Summer23BPixGS-00006-fragment_modified_To_H_AA_2Photon2Tau_leptonic.py \
-# --python_filename HToAA2Tau2Photon_GEN_SIM_cfg.py --eventcontent RAWSIM --customise Configuration/DataProcessing/Utils.addMonitoring \
-# --datatier GEN-SIM --fileout file:GEN_SIM_HToAATo2Tau2Photon.root --conditions 130X_mcRun3_2023_realistic_postBPix_v5 \
-# --beamspot Realistic25ns13p6TeVEarly2023Collision --step GEN,SIM --geometry DB:Extended --era Run3_2023 --no_exec --mc -n 10
 import FWCore.ParameterSet.Config as cms
 
 from Configuration.Eras.Era_Run3_2023_cff import Run3_2023
@@ -59,10 +50,10 @@ process.options = cms.untracked.PSet(
     holdsReferencesToDeleteEarly = cms.untracked.VPSet(),
     makeTriggerResults = cms.obsolete.untracked.bool,
     modulesToIgnoreForDeleteEarly = cms.untracked.vstring(),
-    numberOfConcurrentLuminosityBlocks = cms.untracked.uint32(0),
+    numberOfConcurrentLuminosityBlocks = cms.untracked.uint32(1),
     numberOfConcurrentRuns = cms.untracked.uint32(1),
     numberOfStreams = cms.untracked.uint32(0),
-    numberOfThreads = cms.untracked.uint32(1),
+    numberOfThreads = cms.untracked.uint32(8),
     printDependencies = cms.untracked.bool(False),
     sizeOfStackForThreadsInKB = cms.optional.untracked.uint32,
     throwIfIllegalParameter = cms.untracked.bool(True),
@@ -113,19 +104,7 @@ process.GenHToAATo2Gluon2PhotonFilter = cms.EDFilter("GenHToAATo2Gluon2PhotonFil
    nHiggs_    = cms.int32(1),          # number of Higgs in the event
 )
 
-process.generator = cms.EDFilter("Pythia8PtGun",
-    PGunParameters = cms.PSet(
-        MinEta = cms.double(-2.4),
-        MaxEta = cms.double(2.4),
-		MinPhi = cms.double(-3.14159),
-		MaxPhi = cms.double(3.14159),
-        MinPt = cms.double(5.0),
-        MaxPt = cms.double(150.0),
-		MinMass = cms.double(3.6),
-        MaxMass = cms.double(8.0),
-        AddAntiParticle = cms.bool(False),
-        ParticleID = cms.vint32(35)
-    ),
+process.generator = cms.EDFilter("Pythia8GeneratorFilter",
     PythiaParameters = cms.PSet(
         parameterSets = cms.vstring('processParameters'),   
         processParameters = cms.vstring(        
