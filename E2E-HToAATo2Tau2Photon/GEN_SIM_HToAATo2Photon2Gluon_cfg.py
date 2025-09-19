@@ -108,8 +108,8 @@ process.generator = cms.EDFilter("Pythia8GeneratorFilter",
     PythiaParameters = cms.PSet(
         parameterSets = cms.vstring('processParameters'),   
         processParameters = cms.vstring(        
-            'Higgs:useBSM = on',
-            'HiggsBSM:gg2H2 = on',
+            'HiggsSM: all = off',
+            'HiggsSM:gg2H = on',
 			
             '36:new = a2 a2 1 0 0 1.27 0.0 0.0 2.54 0.0',
 			'36:isResonance = on',
