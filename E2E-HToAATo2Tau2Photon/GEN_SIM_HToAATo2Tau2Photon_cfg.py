@@ -1,12 +1,3 @@
-# Auto generated configuration file
-# using:
-# Revision: 1.19
-# Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v
-# with command line options: 
-# Configuration/GenProduction/python/HIG-Run3Summer23BPixGS-00006-fragment_modified_To_H_AA_2Photon2Tau_leptonic.py \
-# --python_filename HToAA2Tau2Photon_GEN_SIM_cfg.py --eventcontent RAWSIM --customise Configuration/DataProcessing/Utils.addMonitoring \
-# --datatier GEN-SIM --fileout file:GEN_SIM_HToAATo2Tau2Photon.root --conditions 130X_mcRun3_2023_realistic_postBPix_v5 \
-# --beamspot Realistic25ns13p6TeVEarly2023Collision --step GEN,SIM --geometry DB:Extended --era Run3_2023 --no_exec --mc -n 10
 import FWCore.ParameterSet.Config as cms
 
 from Configuration.Eras.Era_Run3_2023_cff import Run3_2023
@@ -30,7 +21,7 @@ process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(20),
+    input = cms.untracked.int32(1),
     output = cms.optional.untracked.allowed(cms.int32,cms.PSet)
 )
 
@@ -59,10 +50,10 @@ process.options = cms.untracked.PSet(
     holdsReferencesToDeleteEarly = cms.untracked.VPSet(),
     makeTriggerResults = cms.obsolete.untracked.bool,
     modulesToIgnoreForDeleteEarly = cms.untracked.vstring(),
-    numberOfConcurrentLuminosityBlocks = cms.untracked.uint32(0),
+    numberOfConcurrentLuminosityBlocks = cms.untracked.uint32(1),
     numberOfConcurrentRuns = cms.untracked.uint32(1),
     numberOfStreams = cms.untracked.uint32(0),
-    numberOfThreads = cms.untracked.uint32(1),
+    numberOfThreads = cms.untracked.uint32(8),
     printDependencies = cms.untracked.bool(False),
     sizeOfStackForThreadsInKB = cms.optional.untracked.uint32,
     throwIfIllegalParameter = cms.untracked.bool(True),
@@ -71,7 +62,7 @@ process.options = cms.untracked.PSet(
 
 # Production Info
 process.configurationMetadata = cms.untracked.PSet(
-    annotation = cms.untracked.string('Configuration/GenProduction/python/HIG-Run3Summer23BPixGS-00006-fragment_modified_To_H_AA_2Photon2Tau_leptonic.py nevts:10'),
+    annotation = cms.untracked.string('Configuration/GenProduction/python/HIG-Run3Summer23BPixGS-00006-fragment_modified_To_H_AA_2Tau2Pho_hadronic.py nevts:10'),
     name = cms.untracked.string('Applications'),
     version = cms.untracked.string('$Revision: 1.19 $')
 )
@@ -103,53 +94,45 @@ process.genstepfilter.triggerConditions=cms.vstring("generation_step")
 from Configuration.AlCa.GlobalTag import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, '130X_mcRun3_2023_realistic_postBPix_v5', '')
 
+
 process.genHToAATo2Tau2PhotonFilter = cms.EDFilter("GenHToAATo2Tau2PhotonFilter",
    src        = cms.InputTag("genParticles"), #GenParticles collection as input
    tauPtCut   = cms.double(5.0),     # GenTau minimum pT
    tauEtaCut  = cms.double(2.4),     # GenTau eta max value
-   phoPtCut_  = cms.double(5.0),     # GenPho minimum pT
-   phoEtaCut_ = cms.double(2.4),     # GenPho eta max value
-   phoDrCut_  = cms.double(0.2),     # min dR between the photons
-   nHiggs_    = cms.int32(1),          # number of Higgs in the event
+   phoPtCut   = cms.double(13.0),    # GenPho minimum pT
+   phoEtaCut  = cms.double(2.4),     # GenPho eta max value
+   phoDrCut   = cms.double(0.1),     # min dR between the photons
+   diPhoPtCut = cms.double(26),      # diPhoton pseudoscalar pT
+   diTauPtCut = cms.double(8),       # diTau pseudoscalar pT
+   nHiggs     = cms.int32(1),        # number of Higgs in the event
 )
 
-process.generator = cms.EDFilter("Pythia8PtGunV4",
-    PGunParameters = cms.PSet(
-        MinEta = cms.double(-2.4),
-        MaxEta = cms.double(2.4),
-        MinPt = cms.double(5.0),
-        MaxPt = cms.double(150.0),
-        PtRes = cms.double(5.0),
-		MinMass = cms.double(3.6),
-        MaxMass = cms.double(8.0),
-        MassRes = cms.double(0.2),
-        AddAntiParticle = cms.bool(False),
-        ParticleID = cms.vint32(35)
-    ),
+process.generator = cms.EDFilter("Pythia8GeneratorFilter",
     PythiaParameters = cms.PSet(
-        parameterSets = cms.vstring('processParameters'),   
+        parameterSets = cms.vstring('processParameters'),
         processParameters = cms.vstring(        
             'Higgs:useBSM = on',
             'HiggsBSM:gg2H2 = on',
-            '35:m0 = 125.',
-            '35:onMode = off',
             
-            '26:new = a a 1 0 0 10.0 0. 10.0 10.0 0', # name antiName spinType chargeType colType m0 mWidth mMin mMax tau0
-            '26:isResonance = on',
-            '26:mayDecay = on',
-            '26:m0 = 10.',
+            '36:new = a2 a2 1 0 0 2.0 0.0 0.0 2.54 0.0',
+            '36:isResonance = on',
+            '36:mayDecay = on',
+            '36:onMode = on',
+            '36:addChannel = 1, 1.0, 101, 22, 22',
+            '36:mWidth = 1e-3',
             
-            '35:onIfMatch = 25 26',
+            '35:new = a1 a1 1 0 0 2.0 0.0 0.0 2.54 0.0',
+            '35:isResonance = on',
+            '35:mayDecay = on',
+            '35:onMode = on',
+            '35:addChannel = 1, 1.0, 101, 21, 21',
+            '35:mWidth = 1e-3',
 
-            '25:m0 = 10',
-            '25:onMode = off',
-            '25:onIfMatch = 22 22',
-
-            '26:onMode = off',
-            '26:onIfMatch = 15 -15',
-
-            '15:onMode = on',
-            '15:onIfAny = 11 -11 13 -13',
+            '25:onMode: off',
+            '25:addChannel = 1, 1.0, 101, 35, 36',
+            '25:mayDecay = on',
+            '25:isResonance = on',
+            '25:mWidth = 4.08e-3',
         ),
         pythia8CP5Settings = cms.vstring(
             'Tune:pp 14',
@@ -183,14 +166,25 @@ process.generator = cms.EDFilter("Pythia8PtGunV4",
             'ParticleDecays:limitTau0 = on',
             'ParticleDecays:tau0Max = 10',
             'ParticleDecays:allowPhotonRadiation = on'
+        ),
+    ),
+    UserCustomization = cms.VPSet(
+        cms.PSet(
+            pluginName  = cms.string('HtoAAhook'),
+            minMass     = cms.double(3.6),
+            maxMass     = cms.double(8.0),
+            massRes     = cms.double(0.2),
+            motherID    = cms.uint32(25),
+            daughter1ID = cms.uint32(36),
+            daughter2ID = cms.uint32(35)
         )
     ),
-    comEnergy = cms.double(13600.0),
+    comEnergy = cms.double(14000.0),
     crossSection = cms.untracked.double(1.0),
     filterEfficiency = cms.untracked.double(1),
-    maxEventsToPrint = cms.untracked.int32(0),
-    pythiaHepMCVerbosity = cms.untracked.bool(False),
-    pythiaPylistVerbosity = cms.untracked.int32(0)
+    maxEventsToPrint = cms.untracked.int32(1),
+    pythiaHepMCVerbosity = cms.untracked.bool(True),
+    pythiaPylistVerbosity = cms.untracked.int32(1)
 )
 
 
@@ -209,7 +203,7 @@ from PhysicsTools.PatAlgos.tools.helpers import associatePatAlgosToolsTask
 associatePatAlgosToolsTask(process)
 # filter all path with the production filter sequence
 for path in process.paths:
-	getattr(process,path).insert(0, process.ProductionFilterSequence)
+        getattr(process,path).insert(0, process.ProductionFilterSequence)
 
 # customisation of the process.
 
