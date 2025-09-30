@@ -2,7 +2,7 @@
 # using:
 # Revision: 1.19
 # Source: /local/reps/CMSSW/CMSSW/Configuration/Applications/python/ConfigBuilder.py,v
-# with command line options: --python_filename AOD_HToAATo2Tau2Photon_cfg.py --eventcontent AODSIM --customise Configuration/DataProcessing/Utils.addMonitoring --datatier AODSIM --fileout file:AOD_HToAATo2Tau2Photon.root --conditions 130X_mcRun3_2023_realistic_postBPix_v6 --step RAW2DIGI,L1Reco,RECO,RECOSIM --geometry DB:Extended --filein file:HLT_Pielup_HToAATo2Tau2Photon.root --era Run3_2023 --no_exec --mc -n -1
+# with command line options: --python_filename AOD_HToAATo2Gluon2Photon_cfg.py --eventcontent AODSIM --customise Configuration/DataProcessing/Utils.addMonitoring --datatier AODSIM --fileout file:AOD_HToAATo2Gluon2Photon.root --conditions 130X_mcRun3_2023_realistic_postBPix_v6 --step RAW2DIGI,L1Reco,RECO,RECOSIM --geometry DB:Extended --filein file:HLT_Pielup_HToAATo2Gluon2Photon.root --era Run3_2023 --no_exec --mc -n -1
 import FWCore.ParameterSet.Config as cms
 
 from Configuration.Eras.Era_Run3_2023_cff import Run3_2023
@@ -31,7 +31,7 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('file:HLT_Pileup_HToAATo2Tau2Photon.root'),
+    fileNames = cms.untracked.vstring('file:HLT_Pileup_HToAATo2Gluon2Photon.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 
@@ -84,7 +84,7 @@ process.AODSIMoutput = cms.OutputModule("PoolOutputModule",
         filterName = cms.untracked.string('')
     ),
     eventAutoFlushCompressedSize = cms.untracked.int32(31457280),
-    fileName = cms.untracked.string('file:AOD_HToAATo2Tau2Photon_extra_collection.root'),
+    fileName = cms.untracked.string('file:AOD_HToAATo2Gluon2Photon_extra_collection.root'),
     # outputCommands = process.AODSIMEventContent.outputCommands,
     outputCommands = process.AODSIMEventContent.outputCommands+cms.untracked.vstring(
         'keep *_simSiPixelDigis_*_*',
