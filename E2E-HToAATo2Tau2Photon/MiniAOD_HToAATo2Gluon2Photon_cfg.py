@@ -24,7 +24,7 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('file:AOD_HToAATo2Gluon2Photon.root'),
+    fileNames = cms.untracked.vstring('file:AOD_HToAATo2Gluon2Photon_extra_collection.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 
