@@ -3,7 +3,7 @@ config = config()
 
 Mass_tag = 'm3p6To8'
 
-inputDataset_ = string(open('/store/user/ecentamo/GEN_SIM_HToAATo2Gluon2Photon_m3p6To8_m3p6To8').readlines())
+inputDataset_ = (open('/store/user/ecentamo/GEN_SIM_HToAATo2Gluon2Photon_m3p6To8_m3p6To8').readlines())
 
 
 #config.section_('General')
