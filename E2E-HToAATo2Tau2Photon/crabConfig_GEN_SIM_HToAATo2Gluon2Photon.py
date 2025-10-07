@@ -14,13 +14,13 @@ config.JobType.psetName = 'GEN_SIM_HToAATo2Gluon2Photon_cfg.py'
 config.Data.outputPrimaryDataset = 'GEN_SIM_HToAATo2Gluon2Photon_%s_m3p6To8'%Mass_tag
 
 config.JobType.maxMemoryMB = 4000
-config.JobType.numCores = 1
+config.JobType.numCores = 8
 
 # Define units per job here:
 config.JobType.allowUndistributedCMSSW = True
 config.Data.splitting = 'EventBased'
 config.Data.unitsPerJob = 1000
-NJOBS = 100
+NJOBS = 150
 config.Data.totalUnits = config.Data.unitsPerJob * NJOBS
 config.Data.publication = False
 
@@ -28,5 +28,5 @@ config.Data.ignoreLocality = True
 config.Site.whitelist = ['T3_US_FNALLPC', 'T2_AT_Vienna', 'T2_BE_IIHE', 'T2_BE_UCL', 'T2_BR_SPRACE', 'T2_BR_UERJ', 'T2_CH_CERN', 'T2_CN_Beijing', 'T2_DE_DESY', 'T2_DE_RWTH', 'T2_EE_Estonia', 'T2_ES_CIEMAT', 'T2_ES_IFCA', 'T2_FI_HIP', 'T2_FR_IPHC', 'T2_GR_Ioannina', 'T2_HU_Budapest', 'T2_IN_TIFR', 'T2_IT_Bari', 'T2_IT_Legnaro', 'T2_IT_Pisa', 'T2_IT_Rome', 'T2_KR_KISTI', 'T2_PK_NCP', 'T2_PL_Cyfronet', 'T2_PT_NCG_Lisbon', 'T2_RU_IHEP', 'T2_TR_METU', 'T2_TW_NCHC', 'T2_UA_KIPT', 'T2_UK_London_Brunel', 'T2_UK_London_IC', 'T2_UK_SGrid_Bristol', 'T2_UK_SGrid_RALPP', 'T2_US_Caltech', 'T2_US_Florida', 'T2_US_MIT', 'T2_US_Nebraska', 'T2_US_Purdue', 'T2_US_UCSD', 'T2_US_Vanderbilt', 'T2_US_Wisconsin' ]
 
 # Output files will be stored in config.Site.storageSite at directory:
-config.Data.outLFNDirBase = '/store/user/ecentamo'
+config.Data.outLFNDirBase = '/eos/uscms/store/user/ecentamo'
 config.Site.storageSite = 'T3_US_FNALLPC'
