@@ -14,7 +14,7 @@ config.JobType.psetName = 'GEN_SIM_HToAATo2Gluon2Photon_cfg.py'
 config.Data.outputPrimaryDataset = 'GEN_SIM_HToAATo2Gluon2Photon_%s_m3p6To8'%Mass_tag
 
 config.JobType.maxMemoryMB = 4000
-config.JobType.numCores = 8
+config.JobType.numCores = 1
 
 # Define units per job here:
 config.JobType.allowUndistributedCMSSW = True
