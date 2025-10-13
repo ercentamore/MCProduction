@@ -11,7 +11,7 @@ config.General.workArea = 'large_scale_runs'
 config.General.transferOutputs = True
 config.General.transferLogs = True
 
-config.Data.inputDataset = inputDataset_
+config.Data.inputDataset = inputDataset_[0]
 # config.Data.inputBlocks = inputProcess_
 #config.section_('JobType')
 #config.JobType.pluginName = 'PrivateMC'
