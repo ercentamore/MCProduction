@@ -3,7 +3,7 @@ config = config()
 
 Mass_tag = 'm3p6To8'
 
-inputDataset_ = '/GEN_SIM_HToAATo2Tau2Photon_m3p6To8_m3p6To8/ecentamo-HToAATo2Gluon2Photon_Hadronic_m3p6To8_pythia8_GEN_SIM-8310f3526c7444509d44f72cc60fac80/USER'
+inputFiles_ = open('/uscms/home/ecentamo/nobackup/CMSSW_13_0_13/src/MCProduction/E2E-HToAATo2Tau2Photon/gen_sim_file_list.txt').readlines()
 
 #config.section_('General')
 config.General.requestName = '%s_HLT_Pileup'%Mass_tag
@@ -11,19 +11,20 @@ config.General.workArea = 'large_scale_runs'
 config.General.transferOutputs = True
 config.General.transferLogs = True
 
-config.Data.inputDataset = inputDataset_
+config.Data.userInputFiles = inputFiles_
 # config.Data.inputBlocks = inputProcess_
 #config.section_('JobType')
 #config.JobType.pluginName = 'PrivateMC'
 config.JobType.pluginName = 'Analysis'
 config.JobType.psetName = 'HLT_Pileup_HToAATo2Gluon2Photon_cfg.py'
+config.Data.outputPrimaryDataset = 'HLT_Pileup_HToAATo2Gluon2Photon_%s_m3p6To8'%Mass_tag
 #config.JobType.maxMemoryMB = 4000
 config.JobType.maxMemoryMB = 8500
 config.JobType.numCores = 4
 # config.JobType.maxJobRuntimeMin = 2750
 
 # config.Data.inputDBS = 'global'
-config.Data.inputDBS = 'phys03'
+#config.Data.inputDBS = 'phys03'
 config.JobType.allowUndistributedCMSSW = True
 #config.Data.inputDataset = inputProcess_
 
