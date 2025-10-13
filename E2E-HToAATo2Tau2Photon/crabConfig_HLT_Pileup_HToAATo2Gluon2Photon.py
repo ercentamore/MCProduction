@@ -3,7 +3,7 @@ config = config()
 
 Mass_tag = 'm3p6To8'
 
-inputDataset_ = '/store/user/ecentamo/GEN_SIM_HToAATo2Gluon2Photon_m3p6To8_m3p6To8/crab_HToAATo2Gluon2Photon_Hadronic_m3p6To8_pythia8_GEN_SIM/251011_045452/0000/GEN_SIM_HToAATo2Gluon2Photon_*'
+inputDataset_ = '/GEN_SIM_HToAATo2Tau2Photon_m3p6To8_m3p6To8/ecentamo-HToAATo2Gluon2Photon_Hadronic_m3p6To8_pythia8_GEN_SIM-8310f3526c7444509d44f72cc60fac80/USER'
 
 #config.section_('General')
 config.General.requestName = '%s_HLT_Pileup'%Mass_tag
