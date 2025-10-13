@@ -3,7 +3,7 @@ config = config()
 
 Mass_tag = 'm3p6To8'
 
-inputDataset_ = './gen_sim_file_list.txt'
+inputDataset_ = '/store/user/ecentamo/GEN_SIM_HToAATo2Gluon2Photon_m3p6To8_m3p6To8/crab_HToAATo2Gluon2Photon_Hadronic_m3p6To8_pythia8_GEN_SIM/251011_045452/0000/GEN_SIM_HToAATo2Gluon2Photon_*'
 
 #config.section_('General')
 config.General.requestName = '%s_HLT_Pileup'%Mass_tag
