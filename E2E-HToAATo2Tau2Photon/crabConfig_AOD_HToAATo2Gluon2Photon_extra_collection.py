@@ -3,8 +3,7 @@ config = config()
 
 Mass_tag = 'm3p6To8'
 
-inputDataset_ = string(open('/store/user/ecentamo/GEN_SIM_HToAATo2Gluon2Photon_m3p6To8_m3p6To8').readlines())
-
+inputFiles_ = open('/uscms/home/ecentamo/nobackup/CMSSW_13_0_13/src/MCProduction/E2E-HToAATo2Tau2Photon/HLT_pileup_file_list.txt').readlines()
 
 #config.section_('General')
 config.General.requestName = '%s_AODSIM'%Mass_tag
@@ -12,12 +11,13 @@ config.General.workArea = 'large_scale_runs'
 config.General.transferOutputs = True
 config.General.transferLogs = True
 
-config.Data.inputDataset = inputDataset_
+config.Data.userInputFiles = inputFiles_
 # config.Data.inputBlocks =inputProcess_
 #config.section_('JobType')
 #config.JobType.pluginName = 'PrivateMC'
 config.JobType.pluginName = 'Analysis'
 config.JobType.psetName = 'AOD_HToAATo2Gluon2Photon_extra_collection_cfg.py'
+config.Data.outputPrimaryDataset = 'AOD_HToAATo2Gluon2Photon_%s_m3p6To8'%Mass_tag
 #config.JobType.maxMemoryMB = 4000
 config.JobType.maxMemoryMB = 8500
 config.JobType.numCores = 4
