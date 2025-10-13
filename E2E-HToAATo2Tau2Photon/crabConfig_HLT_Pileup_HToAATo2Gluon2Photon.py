@@ -3,7 +3,7 @@ config = config()
 
 Mass_tag = 'm3p6To8'
 
-inputDataset_ = (open('gen_sim_file_list.txt').readlines())
+inputDataset_ = './gen_sim_file_list.txt'
 
 #config.section_('General')
 config.General.requestName = '%s_HLT_Pileup'%Mass_tag
@@ -11,7 +11,7 @@ config.General.workArea = 'large_scale_runs'
 config.General.transferOutputs = True
 config.General.transferLogs = True
 
-config.Data.inputDataset = inputDataset_[0]
+config.Data.inputDataset = inputDataset_
 # config.Data.inputBlocks = inputProcess_
 #config.section_('JobType')
 #config.JobType.pluginName = 'PrivateMC'
