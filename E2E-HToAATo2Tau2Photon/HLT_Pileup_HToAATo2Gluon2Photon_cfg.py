@@ -106,7 +106,7 @@ process.PREMIXRAWoutput = cms.OutputModule("PoolOutputModule",
 # Additional output definition
 
 # Other statements
-process.mixData.input.fileNames = cms.untracked.vstring(open('./neutrino_pileup_Bpix.txt').readlines())
+process.mixData.input.fileNames = cms.untracked.vstring(open('neutrino_pileup_Bpix.txt').readlines())
 process.mixData.input.skipBadFiles = cms.untracked.bool(True)
 from Configuration.AlCa.GlobalTag import GlobalTag
 process.GlobalTag = GlobalTag(process.GlobalTag, '130X_mcRun3_2023_realistic_postBPix_v5', '')
