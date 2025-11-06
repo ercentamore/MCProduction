@@ -3,7 +3,7 @@ config = config()
 
 Mass_tag = 'm3p6To8'
 
-inputFiles_ = open('/uscms/home/ecentamo/nobackup/CMSSW_13_0_13/src/MCProduction/E2E-HToAATo2Tau2Photon/gen_sim_file_list.txt').readlines()
+inputFiles_ = open('/uscms/home/ecentamo/nobackup/CMSSW_13_0_13/src/MCProduction/E2E-HToAATo2Tau2Photon/GEN_SIM_file_list.txt').readlines()
 
 #config.section_('General')
 config.General.requestName = '%s_HLT_Pileup'%Mass_tag
